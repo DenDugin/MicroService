@@ -49,6 +49,9 @@ public class EditeProfileController {
     //public SkillForm getEditSkills(@RequestBody SkillForm skillForm) {
     public ResponseEntity  postEditSkill(@RequestBody SkillForm skillForm, @RequestParam long id) {
 
+      if (skillForm == null)
+            throw new CantCompleteClientRequestException("SkillForm is null");
+
         editProfileService.updateSkills(id,skillForm.getItems());
 
     return new ResponseEntity<>(HttpStatus.OK);
