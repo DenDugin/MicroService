@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: resume.microservice.com.ResumeService.ResumeMicroserviceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.641 s - in resume.microservice.com.ResumeService.ResumeMicroserviceApplicationTests

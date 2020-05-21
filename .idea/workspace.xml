@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="44199742-6295-4531-91af-8af81d31d204" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1akVJeDz6gPSfoVUj3TBizlBtAy" />
+  <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Resume_3.0" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="resume.microservice.com.ResumeService.exception" />
+      <recent name="resume.microservice.com.ResumeService.annotation" />
+      <recent name="resume.microservice.com.ResumeService.Util" />
+      <recent name="resume.microservice.com.ResumeService.service.impl" />
+      <recent name="resume.microservice.com.ResumeService.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Development\Java\ResumeService\src\main\java\resume\microservice\com\ResumeService" />
+      <recent name="D:\Development\Java\ResumeService\src\main\java\resume\microservice\com\ResumeService\entity" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn install" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="ResumeMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ResumeService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="resume.microservice.com.ResumeService.ResumeMicroserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44199742-6295-4531-91af-8af81d31d204" name="Default Changelist" comment="" />
+      <created>1587279507270</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587279507270</updated>
+      <workItem from="1587279509724" duration="6218000" />
+      <workItem from="1587290694621" duration="7000" />
+      <workItem from="1587439090368" duration="1040000" />
+      <workItem from="1587612900578" duration="19583000" />
+      <workItem from="1587704236911" duration="9938000" />
+      <workItem from="1587796458824" duration="2313000" />
+      <workItem from="1589013180539" duration="6464000" />
+      <workItem from="1589091052132" duration="541000" />
+      <workItem from="1589093117996" duration="2165000" />
+      <workItem from="1589274665128" duration="5493000" />
+      <workItem from="1589464003727" duration="475000" />
+      <workItem from="1589588714541" duration="3757000" />
+      <workItem from="1589700914621" duration="10829000" />
+      <workItem from="1589825861184" duration="1174000" />
+      <workItem from="1589864275655" duration="10438000" />
+      <workItem from="1589899274650" duration="5404000" />
+      <workItem from="1589958050959" duration="3248000" />
+      <workItem from="1590037911947" duration="3401000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/exception/AppExceptionsHandler.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/PublicDataController.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/PublicDataController.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/Util/Parser.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/Controller.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/EditeProfileController.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/EditeProfileController.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/EditeProfileController.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>213</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>230</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>231</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>221</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/Util/DataUtil.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>222</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>215</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>219</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/service/impl/EditProfileServiceImpl.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/resume/microservice/com/ResumeService/controller/EditeProfileController.java</url>
+          <line>80</line>
+          <properties class="resume.microservice.com.ResumeService.controller.EditeProfileController" method="getEditProfile">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="((NoNodeAvailableException)targetException).cause" custom="org.elasticsearch.client.transport.NoNodeAvailableException" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
