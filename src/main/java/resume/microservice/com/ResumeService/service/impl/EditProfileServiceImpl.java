@@ -2,6 +2,7 @@ package resume.microservice.com.ResumeService.service.impl;
 
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.multipart.MultipartFile;
+import resume.microservice.com.ResumeService.Form.InfoForm;
 import resume.microservice.com.ResumeService.Form.SignUpForm;
 import resume.microservice.com.ResumeService.Util.DataUtil;
 import resume.microservice.com.ResumeService.annotation.ProfileDataFieldGroup;
@@ -182,8 +184,13 @@ public class EditProfileServiceImpl implements EditProfileService {
     }
 
     @Override
-    public Profile findProfileById(String id) {
-        return profileRepository.findByUid(id);
+    public Profile findProfileById(Long id) {
+
+        Optional<Profile> profile = profileRepository.findById(id);
+
+        return profile.get();
+
+        //return profileRepository.findByUid(id);
     }
 
 
@@ -244,6 +251,24 @@ public class EditProfileServiceImpl implements EditProfileService {
         Profile profileForPhone = profileRepository.findByPhone(profileForm.getPhone());
         if (profileForPhone != null && !profileForPhone.getId().equals(profileForm.getId())) {
             throw new FormValidationException("phone", profileForm.getPhone());
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateInfo(Profile profile, InfoForm form) {
+
+        Optional<Profile> loadedProfile = profileRepository.findById(profile.getId());
+
+        if (!StringUtils.equals(loadedProfile.get().getInfo(), form.getInfo())) {
+            loadedProfile.get().setInfo(form.getInfo());
+
+            profileRepository.save(loadedProfile.get());
+
+            // updateIndexProfileInfoIfTransactionSuccess(currentProfile, loadedProfile);
+           // evilcProfileCacheIfTransactionSuccess(currentProfile);
+        } else {
+            LOGGER.debug("Profile info not updated");
         }
     }
 

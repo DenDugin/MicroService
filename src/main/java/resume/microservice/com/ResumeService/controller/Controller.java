@@ -90,4 +90,62 @@ public class Controller {
     }
 
 
+
+
+
+
+    private myThread thread = null;
+
+    @GetMapping(path = "/thread")
+    public String testThread() {
+
+        if ( thread != null  ) {
+            if (thread.isAlive())
+                return "Thread BUSY";
+            else  { thread = null; return thread.rezult; }
+        }
+
+        try {
+
+
+            thread = new myThread();
+            thread.start();
+
+            return "Thread is RUN !";
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "Hello Thread!";
+    }
+
+
+    public static class myThread extends Thread {
+
+        public  static String rezult;
+
+        public static int i = 1;
+
+        @Override
+        public void run() {
+            try {
+
+                for (int i=0; i<5; i++)
+                    Thread.sleep(1000);
+
+                rezult = "DONE : " + i;
+
+                i++;
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
 }
+

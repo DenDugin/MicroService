@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import resume.microservice.com.ResumeService.Form.InfoForm;
 import resume.microservice.com.ResumeService.Form.SkillForm;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.entity.Skill;
@@ -24,7 +25,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/edit")
+@RequestMapping("/profile")
 public class EditeProfileController {
 
 
@@ -34,6 +35,21 @@ public class EditeProfileController {
 
     @Autowired
     private FindProfileService findProfileService;
+
+
+
+//    @GetMapping("/info")
+//    public ResponseEntity<Profile> getInfo( @RequestParam long id ) {
+//
+//        Profile profile = findProfileService.findOne( id );
+//
+//        if ( profile == null )
+//            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
+//
+//        return new ResponseEntity<Profile>(profile, HttpStatus.OK);
+//    }
+
+
 
 
 
@@ -73,7 +89,7 @@ public class EditeProfileController {
     public ResponseEntity postEditSkill(@RequestBody Profile profile, @RequestParam long id) {
 
         editProfileService.updateObjective( id, profile.getObjective(), profile.getSummary());
-
+        
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -81,12 +97,12 @@ public class EditeProfileController {
 
 
     @GetMapping("/profile")
-    public ResponseEntity<Profile> getEditProfile(@RequestParam String uid)
+    public ResponseEntity<Profile> getEditProfile(@RequestParam Long id)
     {
-        Profile profile = editProfileService.findProfileById(uid);
+        Profile profile = editProfileService.findProfileById(id);
 
         if ( profile == null )
-            throw new CantCompleteClientRequestException("Can't find profile by id : " + uid);
+            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
 
         return new ResponseEntity<Profile>(profile,HttpStatus.OK);
 
@@ -94,10 +110,17 @@ public class EditeProfileController {
 
 
 
-    @PutMapping("/profile")
-    public ResponseEntity postEditSkill(@RequestParam String uid, @RequestBody Profile profile) {
+    @PostMapping("/infoform")
+    public ResponseEntity postEditSkill(@RequestBody InfoForm infoForm, @RequestParam Long id ) {
 
-        editProfileService.updateProfileData(profile);
+        Profile profile = editProfileService.findProfileById(id);
+
+        if ( profile == null )
+            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
+
+        editProfileService.updateInfo(profile,infoForm);
+
+        // editProfileService.updateProfileData(profile);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

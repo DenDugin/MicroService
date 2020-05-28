@@ -2,6 +2,7 @@ package resume.microservice.com.ResumeService.service;
 
 
 
+import resume.microservice.com.ResumeService.Form.InfoForm;
 import resume.microservice.com.ResumeService.Form.SignUpForm;
 import resume.microservice.com.ResumeService.entity.Hobby;
 import resume.microservice.com.ResumeService.entity.Profile;
@@ -38,8 +39,10 @@ public interface EditProfileService {
     void updateObjective(long id, String Objective, String Summary);
 
 
-    Profile findProfileById(String id);
+    Profile findProfileById(Long id);
 
     void updateProfileData(Profile profile);
+
+    void updateInfo(Profile profile, InfoForm form);
 
 }
