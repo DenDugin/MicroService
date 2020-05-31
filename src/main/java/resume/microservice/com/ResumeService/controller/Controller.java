@@ -1,14 +1,13 @@
 package resume.microservice.com.ResumeService.controller;
 
 
-import com.squareup.okhttp.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import resume.microservice.com.ResumeService.Util.Parser;
-import resume.microservice.com.ResumeService.Util.RequestUtil;
+import resume.microservice.com.ResumeService.util.Parser;
+import resume.microservice.com.ResumeService.util.RequestUtil;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.entity.SkillCategory;
 import resume.microservice.com.ResumeService.exception.CantCompleteClientRequestException;

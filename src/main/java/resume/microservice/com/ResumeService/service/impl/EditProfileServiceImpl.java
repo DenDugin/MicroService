@@ -7,14 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.web.multipart.MultipartFile;
-import resume.microservice.com.ResumeService.Form.InfoForm;
-import resume.microservice.com.ResumeService.Form.SignUpForm;
-import resume.microservice.com.ResumeService.Util.DataUtil;
+import resume.microservice.com.ResumeService.form.InfoForm;
+import resume.microservice.com.ResumeService.form.PasswordForm;
+import resume.microservice.com.ResumeService.form.SignUpForm;
+import resume.microservice.com.ResumeService.util.DataUtil;
 import resume.microservice.com.ResumeService.annotation.ProfileDataFieldGroup;
 import resume.microservice.com.ResumeService.entity.Hobby;
 import resume.microservice.com.ResumeService.entity.Profile;
@@ -28,7 +29,6 @@ import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
 import resume.microservice.com.ResumeService.repository.SkillCategoryRepository;
 import resume.microservice.com.ResumeService.service.EditProfileService;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +46,9 @@ public class EditProfileServiceImpl implements EditProfileService {
 
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
+
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
 
     @Value("${generate.uid.suffix.length}")
     private int generateUidSuffixLength;
@@ -270,6 +273,18 @@ public class EditProfileServiceImpl implements EditProfileService {
         } else {
             LOGGER.debug("Profile info not updated");
         }
+    }
+
+    @Override
+    @Transactional
+    public Profile updateProfilePassword(Profile currentProfile, PasswordForm form) {
+
+        Optional<Profile> profile = profileRepository.findById(currentProfile.getId());
+
+        profile.get().setPassword(passwordEncoder.encode(form.getPassword()));
+        profileRepository.save(profile.get());
+        // sendPasswordChangedIfTransactionSuccess(profile);
+        return profile.get();
     }
 
 

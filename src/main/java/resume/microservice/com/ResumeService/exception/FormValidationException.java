@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FormValidationException extends DataAccessException {
-	private static final long serialVersionUID = 6501864699323857677L;
+
 	private String fieldName;
 	private Object rejectedValue;
 	private String errorCode;

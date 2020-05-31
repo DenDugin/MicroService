@@ -2,8 +2,9 @@ package resume.microservice.com.ResumeService.service;
 
 
 
-import resume.microservice.com.ResumeService.Form.InfoForm;
-import resume.microservice.com.ResumeService.Form.SignUpForm;
+import resume.microservice.com.ResumeService.form.InfoForm;
+import resume.microservice.com.ResumeService.form.PasswordForm;
+import resume.microservice.com.ResumeService.form.SignUpForm;
 import resume.microservice.com.ResumeService.entity.Hobby;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.entity.Skill;
@@ -44,5 +45,7 @@ public interface EditProfileService {
     void updateProfileData(Profile profile);
 
     void updateInfo(Profile profile, InfoForm form);
+
+    Profile updateProfilePassword(Profile profile, PasswordForm form);
 
 }

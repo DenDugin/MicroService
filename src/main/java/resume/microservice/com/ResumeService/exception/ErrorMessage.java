@@ -1,12 +1,16 @@
 package resume.microservice.com.ResumeService.exception;
 
+import org.springframework.validation.FieldError;
+
 import java.util.Date;
+import java.util.List;
 
 public class ErrorMessage {
 
     private Date timestamp;
     private String message;
     private int status;
+    private String field;
     private String statusValue;
 
     public ErrorMessage() {};
@@ -50,4 +54,11 @@ public class ErrorMessage {
         return statusValue;
     }
 
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getField() {
+        return field;
+    }
 }
