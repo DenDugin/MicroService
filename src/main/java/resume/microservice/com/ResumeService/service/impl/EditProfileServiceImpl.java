@@ -25,7 +25,7 @@ import resume.microservice.com.ResumeService.exception.CantCompleteClientRequest
 import resume.microservice.com.ResumeService.exception.FormValidationException;
 import resume.microservice.com.ResumeService.exception.UserServiceException;
 import resume.microservice.com.ResumeService.repository.ProfileRepository;
-import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
+//import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
 import resume.microservice.com.ResumeService.repository.SkillCategoryRepository;
 import resume.microservice.com.ResumeService.service.EditProfileService;
 
@@ -41,8 +41,8 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    @Autowired
-    private ProfileSearchRepository profileSearchRepository;
+//    @Autowired
+//    private ProfileSearchRepository profileSearchRepository;
 
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
@@ -98,7 +98,7 @@ public class EditProfileServiceImpl implements EditProfileService {
                 profile.setLanguages(Collections.EMPTY_LIST);
                 profile.setSkills(Collections.EMPTY_LIST);
                 profile.setCourses(Collections.EMPTY_LIST);
-                profileSearchRepository.save(profile);
+                // profileSearchRepository.save(profile);
                 //LOGGER.info("New profile index created: {}", profile.getUid());
             }
         });
@@ -213,7 +213,7 @@ public class EditProfileServiceImpl implements EditProfileService {
         Profile profile = profileRepository.findById(idProfile).get();
 
         profile.setSkills(updatedData);
-        profileSearchRepository.save(profile);
+       //  profileSearchRepository.save(profile);                        // uncommit
         LOGGER.info("Profile skills index updated");
     }
 

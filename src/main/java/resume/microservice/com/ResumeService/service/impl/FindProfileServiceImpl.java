@@ -1,6 +1,7 @@
 package resume.microservice.com.ResumeService.service.impl;
 
 
+import org.aspectj.apache.bcel.generic.RET;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import resume.microservice.com.ResumeService.Language.CurrentProfile;
-import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
+//import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.exception.UserServiceException;
 import resume.microservice.com.ResumeService.repository.ProfileRepository;
@@ -30,8 +31,8 @@ public class FindProfileServiceImpl implements FindProfileService, UserDetailsSe
     private ProfileRepository profileRepository;
 
 
-    @Autowired
-    private ProfileSearchRepository profileSearchRepository;
+//    @Autowired
+//    private ProfileSearchRepository profileSearchRepository;
 
 
     @Override
@@ -85,13 +86,16 @@ public class FindProfileServiceImpl implements FindProfileService, UserDetailsSe
 
     @Override
     public Page<Profile> findBySearchQuery(String query, Pageable pageable) {
-        return profileSearchRepository.findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(
-                query, query, query, query, pageable);
+//        return profileSearchRepository.findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(
+//                query, query, query, query, pageable);
+
+        return null;
     }
 
     @Override
     public Page<Profile> findByName(String query, Pageable pageable) {
-        return profileSearchRepository.findByFirstNameLikeOrLastNameLike( query, query, pageable);
+     //   return profileSearchRepository.findByFirstNameLikeOrLastNameLike( query, query, pageable);
+        return null;
     }
 
 

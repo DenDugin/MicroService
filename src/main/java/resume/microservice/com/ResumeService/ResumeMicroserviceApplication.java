@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import resume.microservice.com.ResumeService.config.ElasticSearchConfig;
+//import resume.microservice.com.ResumeService.config.ElasticSearchConfig;
 
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)

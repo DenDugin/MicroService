@@ -3,7 +3,7 @@ package resume.microservice.com.ResumeService.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
-import org.springframework.data.elasticsearch.annotations.Document;
+//import org.springframework.data.elasticsearch.annotations.Document;
 import resume.microservice.com.ResumeService.annotation.ProfileDataFieldGroup;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "profile")
-@Document(indexName="profile", type = "profile") // для elastica - обозначаем, что данный класс - документ, корневой элемент индексации
+//@Document(indexName="profile", type = "profile") // для elastica - обозначаем, что данный класс - документ, корневой элемент индексации
 public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;
 

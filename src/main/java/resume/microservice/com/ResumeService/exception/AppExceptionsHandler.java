@@ -6,25 +6,21 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import resume.microservice.com.ResumeService.annotation.EnableFormErrorConvertation;
-import resume.microservice.com.ResumeService.annotation.constraints.FieldMatch;
-import resume.microservice.com.ResumeService.component.FormErrorConverter;
-import resume.microservice.com.ResumeService.util.DataUtil;
-import resume.microservice.com.ResumeService.validator.ErrorValue;
+import resume.microservice.com.ResumeService.component.impl.ErrorValue;
 
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 // перехват exception
 @ControllerAdvice
 public class AppExceptionsHandler {
 
+    @Autowired
+    private ErrorValue errorValue;
 
     @ExceptionHandler//(value = {StudentNotFoundException.class})
     // ErrorMessage - type of body response
@@ -40,7 +36,7 @@ public class AppExceptionsHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> handleException(MethodArgumentNotValidException exc) {
+    public ResponseEntity<ErrorMessage> handleException(MethodArgumentNotValidException exc) throws UnsupportedEncodingException {
 
         HttpHeaders headers;
         headers = new HttpHeaders();
@@ -59,8 +55,11 @@ public class AppExceptionsHandler {
 
         String message = exc.getBindingResult().getFieldError().getDefaultMessage();
 
-        if ( ErrorValue.errors.containsKey(message) )
-                message = ErrorValue.errors.get(message);
+
+        if ( errorValue.errors.containsKey(message) )
+                message = errorValue.errors.get(message);
+
+
         //bindingResult.addError(new FieldError(formName, fieldName, value, false, objectError.getCodes(), objectError.getArguments(), objectError.getDefaultMessage()));
 
         errorResponse.setStatusValue(exc.getBindingResult().getFieldError().getField() + " : "+ message);

@@ -1,6 +1,6 @@
 package resume.microservice.com.ResumeService.controller;
 
-import org.elasticsearch.search.suggest.SortBy;
+//import org.elasticsearch.search.suggest.SortBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -128,6 +128,7 @@ public class EditeProfileController {
         return new ResponseEntity<PasswordForm>(new PasswordForm(),HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/password", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Profile> postChangePassword(@Valid @RequestBody PasswordForm passwordForm, @RequestParam Long id, BindingResult bindingResult ) {
         if(bindingResult.hasErrors()) {
