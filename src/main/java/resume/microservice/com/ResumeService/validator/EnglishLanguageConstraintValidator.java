@@ -13,7 +13,6 @@ public class EnglishLanguageConstraintValidator implements ConstraintValidator<E
 	private boolean withSpechSymbols;
 
 
-	// считываем параметры с аннотации @EnglishLanguage
 	@Override
 	public void initialize(EnglishLanguage constraintAnnotation) {
 		this.withNumbers      = constraintAnnotation.withNumbers();

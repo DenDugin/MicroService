@@ -1,4 +1,4 @@
-package resume.microservice.com.ResumeService.Language;
+package resume.microservice.com.ResumeService.model;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

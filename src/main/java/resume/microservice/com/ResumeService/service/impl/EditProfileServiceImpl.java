@@ -12,26 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import resume.microservice.com.ResumeService.entity.*;
 import resume.microservice.com.ResumeService.form.InfoForm;
 import resume.microservice.com.ResumeService.form.PasswordForm;
 import resume.microservice.com.ResumeService.form.SignUpForm;
+import resume.microservice.com.ResumeService.repository.*;
+import resume.microservice.com.ResumeService.service.StaticDataService;
 import resume.microservice.com.ResumeService.util.DataUtil;
 import resume.microservice.com.ResumeService.annotation.ProfileDataFieldGroup;
-import resume.microservice.com.ResumeService.entity.Hobby;
-import resume.microservice.com.ResumeService.entity.Profile;
-import resume.microservice.com.ResumeService.entity.Skill;
-import resume.microservice.com.ResumeService.entity.SkillCategory;
 import resume.microservice.com.ResumeService.exception.CantCompleteClientRequestException;
 import resume.microservice.com.ResumeService.exception.FormValidationException;
 import resume.microservice.com.ResumeService.exception.UserServiceException;
-import resume.microservice.com.ResumeService.repository.ProfileRepository;
-//import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
-import resume.microservice.com.ResumeService.repository.SkillCategoryRepository;
 import resume.microservice.com.ResumeService.service.EditProfileService;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import javax.annotation.PostConstruct;
+import java.util.*;
 
 
 @Service
@@ -41,14 +36,21 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-//    @Autowired
-//    private ProfileSearchRepository profileSearchRepository;
 
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
 
     @Autowired
+    private HobbyRepository hobbyRepository;
+
+    @Autowired
+    private StaticDataService staticDataService;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private LanguageRepository languageRepository;
 
     @Value("${generate.uid.suffix.length}")
     private int generateUidSuffixLength;
@@ -59,8 +61,31 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Value("${generate.uid.max.try.count}")
     private int maxTryCountToGenerateUid;
 
+    @Value("${profile.hobbies.max}")
+    private int maxProfileHobbies;
+
+
+    private Map<Class<? extends ProfileEntity>, AbstractProfileEntityRepository<? extends ProfileEntity>> profileEntityRepositoryMap;
+
+    @PostConstruct
+    private void postConstruct() {
+//        profileCollectionsToReIndex = Collections.unmodifiableSet(
+//                new HashSet<>(Arrays.asList(
+//                        new String[]{"languages", "skills", "practics", "certificates", "courses"})));
+
+        Map<Class<? extends ProfileEntity>, AbstractProfileEntityRepository<? extends ProfileEntity>> map = new HashMap<>();
+//        map.put(Certificate.class, certificateRepository);
+//        map.put(Course.class, courseRepository);
+//        map.put(Education.class, educationRepository);
+        map.put(Hobby.class, hobbyRepository);
+//        map.put(Language.class, languageRepository);
+//        map.put(Practic.class, practicRepository);
+        //       map.put(Skill.class, skillRepository);
+        profileEntityRepositoryMap = Collections.unmodifiableMap(map);
+    }
+
+
     @Override
-    // Аннотация говорит, что все изменения сделанные в этом метода выполняются в одной транзакции!
     @Transactional
     public Profile createNewProfile(SignUpForm signUpForm) {
         Profile profile = new Profile();
@@ -110,36 +135,27 @@ public class EditProfileServiceImpl implements EditProfileService {
 
         Optional<Profile> profile = profileRepository.findById(idProfile);
 
-        return profile.get().getSkills();
-
+        return profile.isPresent() ? profile.get().getSkills() : null;
     }
 
     @Override
     public List<SkillCategory> listSkillCategories() {
-        //return skillCategoryRepository.findAll(new Sort("id"));
 
         return  skillCategoryRepository.findAllByOrderById();
-
     }
 
     @Override
     public List<Hobby> listHobby(long idProfile) {
 
-        //return profileRepository.findOne(idProfile).getHobbies();
-
         return  profileRepository.findById(idProfile).get().getHobbies();
-
     }
 
 
     @Override
-    // Аннотация говорит, что все изменения сделанные в этом метода выполняются в одной транзакции!
     @Transactional
     public void updateSkills(long idProfile, List<Skill> updatedData) {
 
-        // Profile profile = profileRepository.findOne(idProfile);
-
-        Profile profile = profileRepository.findById(idProfile).get();
+        Profile profile = profileRepository.findById(idProfile).orElseThrow(() -> new UserServiceException("Can't find profile by id : "+idProfile) );
 
         if (CollectionUtils.isEqualCollection(updatedData, profile.getSkills())) {
             //LOGGER.debug("Profile skills: nothing to update");
@@ -154,8 +170,6 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Override
     @Transactional
     public void updateHobby(long idProfile, List<Hobby> hobby) {
-
-        //Profile profile = profileRepository.findOne(idProfile);
 
         Profile profile = profileRepository.findById(idProfile).get();
 
@@ -174,8 +188,6 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Transactional
     public void updateObjective(long idProfile, String Objective, String Summary) {
 
-        // Profile profile = profileRepository.findOne(idProfile);
-
         Profile profile = profileRepository.findById(idProfile).get();
 
         if (profile != null )
@@ -189,11 +201,10 @@ public class EditProfileServiceImpl implements EditProfileService {
     @Override
     public Profile findProfileById(Long id) {
 
-        Optional<Profile> profile = profileRepository.findById(id);
+        Profile profile1 = profileRepository.findById(id).orElseThrow(()->new UserServiceException("Can't find profile by id : "+id) );
 
-        return profile.get();
+        return profile1;
 
-        //return profileRepository.findByUid(id);
     }
 
 
@@ -208,7 +219,6 @@ public class EditProfileServiceImpl implements EditProfileService {
     }
 
     private void updateIndexProfileSkills(long idProfile, List<Skill> updatedData) {
-        // Profile profile = profileSearchRepository.findOne(idProfile);
 
         Profile profile = profileRepository.findById(idProfile).get();
 
@@ -259,14 +269,14 @@ public class EditProfileServiceImpl implements EditProfileService {
 
     @Override
     @Transactional
-    public void updateInfo(Profile profile, InfoForm form) {
+    public void updateInfo(Long id, InfoForm form) {
 
-        Optional<Profile> loadedProfile = profileRepository.findById(profile.getId());
+        Profile loadedProfile = profileRepository.findById(id).orElseThrow(()->new UserServiceException("Can't find profile by id : "+id));
 
-        if (!StringUtils.equals(loadedProfile.get().getInfo(), form.getInfo())) {
-            loadedProfile.get().setInfo(form.getInfo());
+        if (!StringUtils.equals(loadedProfile.getInfo(), form.getInfo())) {
+            loadedProfile.setInfo(form.getInfo());
 
-            profileRepository.save(loadedProfile.get());
+            profileRepository.save(loadedProfile);
 
             // updateIndexProfileInfoIfTransactionSuccess(currentProfile, loadedProfile);
            // evilcProfileCacheIfTransactionSuccess(currentProfile);
@@ -277,15 +287,89 @@ public class EditProfileServiceImpl implements EditProfileService {
 
     @Override
     @Transactional
-    public Profile updateProfilePassword(Profile currentProfile, PasswordForm form) {
+    public Profile updateProfilePassword(Profile profile, PasswordForm form) {
 
-        Optional<Profile> profile = profileRepository.findById(currentProfile.getId());
+       // Profile profile = profileRepository.findById(id).orElseThrow(()->new UserServiceException("Can't find profile by id : "+id));
 
-        profile.get().setPassword(passwordEncoder.encode(form.getPassword()));
-        profileRepository.save(profile.get());
+        profile.setPassword(passwordEncoder.encode(form.getPassword()));
+        profileRepository.save(profile);
         // sendPasswordChangedIfTransactionSuccess(profile);
-        return profile.get();
+        return profile;
     }
 
+
+    @Override
+    public List<Hobby> listHobbiesWithProfileSelected(Profile currentProfile) {
+        List<Hobby> profileHobbies = hobbyRepository.findByProfileIdOrderByIdAsc(currentProfile.getId());
+        List<Hobby> hobbies = new ArrayList<>();
+        for (Hobby h : staticDataService.listAllHobbies()) {
+            boolean selected = profileHobbies.contains(h);
+            hobbies.add(new Hobby(h.getName(), selected));
+        }
+        return hobbies;
+    }
+
+    @Override
+    @Transactional
+    public void updateHobbies(Profile currentProfile, List<String> hobbies) {
+        List<Hobby> updatedHobbies = staticDataService.createHobbyEntitiesByNames(hobbies);
+        if (updatedHobbies.size() > maxProfileHobbies) {
+            throw new CantCompleteClientRequestException("Detected more than " + maxProfileHobbies + " hobbies for profile: currentProfile=" + currentProfile + ", hobbies=" + updatedHobbies);
+        }
+        updateProfileEntities(currentProfile, updatedHobbies, Hobby.class);
+    }
+
+
+    protected <E extends ProfileEntity> void updateProfileEntities(Profile currentProfile, List<E> updatedData, Class<E> entityClass) {
+        String collections = DataUtil.getCollectionName(entityClass);
+        AbstractProfileEntityRepository<E> repository = findProfileEntityRepository(entityClass);
+        List<E> profileData = repository.findByProfileIdOrderByIdAsc(currentProfile.getId());
+        DataUtil.removeEmptyElements(updatedData);
+        if (Comparable.class.isAssignableFrom(entityClass)) {
+            Collections.sort((List<? extends Comparable>) updatedData);
+        }
+        if (DataUtil.areListsEqual(updatedData, profileData)) {
+            LOGGER.debug("Profile {}: nothing to update", collections);
+            return;
+        } else {
+            executeProfileEntitiesUpdate(currentProfile, repository, updatedData);
+            //evilcProfileCacheIfTransactionSuccess(currentProfile);
+            //updateIndexProfileEntitiesIfTransactionSuccess(currentProfile, updatedData, collections);
+        }
+    }
+
+
+    protected <E extends ProfileEntity> void executeProfileEntitiesUpdate(Profile currentProfile, AbstractProfileEntityRepository<E> repository, List<E> updatedData) {
+        repository.deleteByProfileId(currentProfile.getId());
+        repository.flush();
+        //Profile profileProxy = profileRepository.getOne(currentProfile.getId());
+        Optional<Profile> profileProxy = profileRepository.findById(currentProfile.getId());
+        for(E entity : updatedData) {
+            entity.setId(null);
+            entity.setProfile(profileProxy.get());
+            repository.saveAndFlush(entity);
+        }
+    }
+
+    protected <E extends ProfileEntity> AbstractProfileEntityRepository<E> findProfileEntityRepository(Class<E> entityClass) {
+        AbstractProfileEntityRepository<E> repository = (AbstractProfileEntityRepository<E>) profileEntityRepositoryMap.get(entityClass);
+        if(repository == null) {
+            throw new IllegalArgumentException("ProfileEntityRepository not found for entityClass="+entityClass);
+        }
+        return repository;
+    }
+
+
+    @Override
+    public List<Language> listLanguages(Profile currentProfile) {
+        return languageRepository.findByProfileIdOrderByIdAsc(currentProfile.getId());
+    }
+
+
+    @Override
+    @Transactional
+    public void updateLanguages(Profile currentProfile, List<Language> languages) {
+        updateProfileEntities(currentProfile, languages, Language.class);
+    }
 
 }

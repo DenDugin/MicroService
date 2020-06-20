@@ -53,8 +53,6 @@ public class ElasticSearchConfig {
 //                .node();
 //    }
 
-    // создаем базовый класс для операций с elastic search
-
 
 
     @Bean

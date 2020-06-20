@@ -6,8 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-// Встраиваемый (Embeddable) класс это класс который не используется сам по себе, только как часть одного или нескольких Entity классов.
-// Такой класс служит для того чтобы выносить определение общих атрибутов для нескольких Entity
+
 @Embeddable
 @Access(AccessType.FIELD)
 public class Contacts implements Serializable {

@@ -6,7 +6,6 @@ import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.repository.ProfileRepository;
 import resume.microservice.com.ResumeService.service.ProfileService;
 
-import java.util.Optional;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -18,17 +17,18 @@ public class ProfileServiceImpl implements ProfileService {
         this.profileRepository = profileRepository;
     }
 
+
     @Override
     public Profile findById(Long id) {
 
-        Optional<Profile> result = profileRepository.findById(id);
-        //  Optional --- шаблон вместо того, чтобы проверять на ноль
-        // функция введена в Java 8
+        Profile profile = profileRepository.findById(id).orElseThrow(() -> new RuntimeException("No find user by id : "+ id));
 
-        if (result.isPresent())
-            return result.get();
-        else  throw new RuntimeException("No find user by id : "+ id);
+        return profile;
 
     }
+
+
+
+
 
 }

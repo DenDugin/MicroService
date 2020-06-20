@@ -7,15 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import resume.microservice.com.ResumeService.form.InfoForm;
-import resume.microservice.com.ResumeService.form.PasswordForm;
-import resume.microservice.com.ResumeService.form.SkillForm;
+import resume.microservice.com.ResumeService.entity.Hobby;
+import resume.microservice.com.ResumeService.form.*;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.entity.Skill;
 import resume.microservice.com.ResumeService.exception.CantCompleteClientRequestException;
 import resume.microservice.com.ResumeService.exception.FormValidationException;
 import resume.microservice.com.ResumeService.service.EditProfileService;
-import resume.microservice.com.ResumeService.service.FindProfileService;
+
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,37 +27,13 @@ public class EditeProfileController {
     @Autowired
     private EditProfileService editProfileService;
 
-
-    @Autowired
-    private FindProfileService findProfileService;
-
-
-
-//    @GetMapping("/info")
-//    public ResponseEntity<Profile> getInfo( @RequestParam long id ) {
-//
-//        Profile profile = findProfileService.findOne( id );
-//
-//        if ( profile == null )
-//            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
-//
-//        return new ResponseEntity<Profile>(profile, HttpStatus.OK);
-//    }
-
-
-
-
-
-    @GetMapping("/skills")
-    //public SkillForm getEditSkills(@RequestBody SkillForm skillForm) {
+    @GetMapping(value = "/skills", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Skill> getEditSkill(@RequestParam long id) {
-
         return editProfileService.listSkills(id);
     }
 
 
-    @PostMapping("/skills")
-    //public SkillForm getEditSkills(@RequestBody SkillForm skillForm) {
+    @PostMapping(value = "/skills", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity  postEditSkill(@RequestBody SkillForm skillForm, @RequestParam long id) {
 
       if (skillForm == null)
@@ -71,34 +46,10 @@ public class EditeProfileController {
 
 
 
-    @GetMapping("/objectivee")
-    public ResponseEntity<Profile> getEditObjectiveMS( @RequestParam long id ) {
-
-        Profile prf = findProfileService.findOne( id );
-
-        return new ResponseEntity<>(prf, HttpStatus.OK);
-    }
-
-
-    @PostMapping("/objectivee")
-    //public SkillForm getEditSkills(@RequestBody SkillForm skillForm) {
-    public ResponseEntity postEditSkill(@RequestBody Profile profile, @RequestParam long id) {
-
-        editProfileService.updateObjective( id, profile.getObjective(), profile.getSummary());
-        
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-// ------------------------------------
-
-    @GetMapping("/info")
+    @GetMapping(value = "/info", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Profile> getEditProfile(@RequestParam Long id)
     {
         Profile profile = editProfileService.findProfileById(id);
-
-        if ( profile == null )
-            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
 
         return new ResponseEntity<Profile>(profile,HttpStatus.OK);
 
@@ -106,23 +57,16 @@ public class EditeProfileController {
 
 
 
-    @PostMapping("/info")
+    @PostMapping(value = "/info", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity postEditSkill(@Valid @RequestBody InfoForm infoForm, @RequestParam Long id ) {
-
-        Profile profile = editProfileService.findProfileById(id);
-
-        if ( profile == null )
-            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
-
-        editProfileService.updateInfo(profile,infoForm);
-
-        // editProfileService.updateProfileData(profile);
+       // Profile profile = editProfileService.findProfileById(id);
+        editProfileService.updateInfo(id, infoForm);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
-    @GetMapping("/password")
+    @GetMapping(value = "/password", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PasswordForm> getPassword(@RequestParam Long id)
     {
         return new ResponseEntity<PasswordForm>(new PasswordForm(),HttpStatus.OK);
@@ -135,15 +79,76 @@ public class EditeProfileController {
             // formErrorConverter.convertFormErrorToFieldError(FieldMatch.class, form, bindingResult);
             throw new FormValidationException(bindingResult.getObjectName(),bindingResult.getTarget(),bindingResult.getFieldError().getCode().toString());
         } else {
-        Profile profile = editProfileService.findProfileById(id);
 
-        if ( profile == null )
-            throw new CantCompleteClientRequestException("Can't find profile by id : " + id);
+        Profile profile = editProfileService.findProfileById(id);
 
         editProfileService.updateProfilePassword(profile, passwordForm);
 
         return new ResponseEntity<Profile>(profile, HttpStatus.OK); }
     }
+
+
+
+    @GetMapping(value = "/hobby", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HobbyForm> getHobby(@RequestParam Long id)
+    {
+        Profile profile = editProfileService.findProfileById(id);
+
+        List<Hobby> hobby = profile.getHobbies();
+        HobbyForm hobbyForm = new HobbyForm(hobby);
+
+        return new ResponseEntity<HobbyForm>(hobbyForm,HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/hobbies", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Hobby>> getHobbies(@RequestParam Long id) {
+
+        Profile profile = editProfileService.findProfileById(id);
+
+        List<Hobby> hobbyList = editProfileService.listHobbiesWithProfileSelected(profile);
+
+        return new ResponseEntity<List<Hobby>>(hobbyList,HttpStatus.OK);
+    }
+
+
+    @PostMapping(value = "/hobbies", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<String>> postHobbies(@RequestBody List<String> hobbies, @RequestParam Long id ) {
+
+        Profile profile = editProfileService.findProfileById(id);
+
+        editProfileService.updateHobbies(profile,hobbies);
+
+         return new ResponseEntity<List<String>>(hobbies, HttpStatus.OK);
+    }
+
+
+
+
+    @GetMapping(value = "/languages", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<LanguageForm> getLanguages(@RequestParam Long id) {
+
+        Profile profile = editProfileService.findProfileById(id);
+
+        LanguageForm languageForm = new LanguageForm(editProfileService.listLanguages(profile));
+
+        return new ResponseEntity<LanguageForm>(languageForm,HttpStatus.OK);
+    }
+
+
+    @PostMapping(value = "/languages", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Profile> postLanguages( @Valid @RequestBody LanguageForm form, @RequestParam Long id ) {
+
+        Profile profile = editProfileService.findProfileById(id);
+
+        editProfileService.updateLanguages(profile, form.getItems());
+
+        return new ResponseEntity<Profile>(profile, HttpStatus.OK);
+    }
+
+
+
+
 
 
 }

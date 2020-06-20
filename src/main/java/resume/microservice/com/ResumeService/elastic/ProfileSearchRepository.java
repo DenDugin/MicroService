@@ -10,10 +10,6 @@
 //
 //public interface ProfileSearchRepository extends ElasticsearchRepository<Profile, Long> {
 //
-//    /**
-//     *
-//     * http://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#elasticsearch.query-methods.criterions
-//     */
 //
 //    // поиск слова в указанных категориях
 //    Page<Profile> findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(

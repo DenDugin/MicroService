@@ -1,4 +1,4 @@
-package resume.microservice.com.ResumeService.Language;
+package resume.microservice.com.ResumeService.model;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

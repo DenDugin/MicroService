@@ -25,10 +25,6 @@ public class Parser {
 
         Element data = news.select("div[class=\"news_v2_item\"]").get(i).select("div[class=\"news_v2_text\"]").first();
 
-        // System.out.println( data.getElementsByClass("news_v2_title").select("a").text());
-
-        // System.out.println( data.getElementsByClass("news_v2_preview").text());
-
         result.append(data.getElementsByClass("news_v2_title").select("a").text());
 
         result.append("<br>");

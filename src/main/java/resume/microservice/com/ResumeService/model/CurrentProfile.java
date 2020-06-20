@@ -1,4 +1,4 @@
-package resume.microservice.com.ResumeService.Language;
+package resume.microservice.com.ResumeService.model;
 
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +9,7 @@ import java.util.Collections;
 
 // текущий залогининый пользователь для Spring Sercurite
 public class CurrentProfile extends User {
-    //private static final long serialVersionUID = 3850489832510630519L;
+
     private final Long id;
     private final String fullName;
 

@@ -2,13 +2,10 @@ package resume.microservice.com.ResumeService.service;
 
 
 
+import resume.microservice.com.ResumeService.entity.*;
 import resume.microservice.com.ResumeService.form.InfoForm;
 import resume.microservice.com.ResumeService.form.PasswordForm;
 import resume.microservice.com.ResumeService.form.SignUpForm;
-import resume.microservice.com.ResumeService.entity.Hobby;
-import resume.microservice.com.ResumeService.entity.Profile;
-import resume.microservice.com.ResumeService.entity.Skill;
-import resume.microservice.com.ResumeService.entity.SkillCategory;
 
 import java.util.List;
 
@@ -44,8 +41,18 @@ public interface EditProfileService {
 
     void updateProfileData(Profile profile);
 
-    void updateInfo(Profile profile, InfoForm form);
+    void updateInfo(Long id, InfoForm form);
 
     Profile updateProfilePassword(Profile profile, PasswordForm form);
+
+
+    List<Hobby> listHobbiesWithProfileSelected(Profile profile);
+
+    void updateHobbies(Profile currentProfile, List<String> hobbies);
+
+    List<Language> listLanguages(Profile currentProfile);
+
+    void updateLanguages(Profile currentProfile, List<Language> languages);
+
 
 }

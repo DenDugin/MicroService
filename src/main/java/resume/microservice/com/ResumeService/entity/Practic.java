@@ -11,7 +11,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "practic")
 public class Practic extends AbstractFinishDateEntity<Long> implements Serializable, ProfileEntity {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @SequenceGenerator(name = "PRACTIC_ID_GENERATOR", sequenceName = "PRACTIC_SEQ", allocationSize = 1)

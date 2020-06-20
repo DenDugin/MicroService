@@ -8,20 +8,14 @@ import javax.persistence.Transient;
 import java.sql.Date;
 
 
-// Аннотация @MappedSuperclass позволяет включать класс и его jpa аннотации в производный класс,
-// не делая базовый класс сущностью. Типичное использование в примере выше — абстрактный базовый класс,
-// несущий в себе суррогатный первичный ключ.
 
 @MappedSuperclass
 public abstract class AbstractFinishDateEntity<T> extends AbstractEntity<T> {
-    private static final long serialVersionUID = -3388293457711051284L;
 
     @Column(name = "finish_date")
     private Date finishDate;
 
 
-    //@Transient — указывает, что свойство не нужно записывать.
-    //Значения под этой аннотацией не записываются в базу данных (так же не участвуют в сериализации)
     @Transient
     private Integer finishDateMonth;
 

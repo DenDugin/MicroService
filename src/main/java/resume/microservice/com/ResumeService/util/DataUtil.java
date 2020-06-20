@@ -1,15 +1,22 @@
 package resume.microservice.com.ResumeService.util;
 
 
-import org.apache.commons.lang.WordUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.util.ReflectionUtils;
-import resume.microservice.com.ResumeService.form.SignUpForm;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+
+import org.apache.commons.lang.WordUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.ReflectionUtils;
+import resume.microservice.com.ResumeService.entity.ProfileEntity;
+import resume.microservice.com.ResumeService.form.SignUpForm;
+
+import com.google.common.base.Objects;
 
 public class DataUtil {
 
@@ -81,6 +88,49 @@ public class DataUtil {
         } catch (IllegalAccessException | InvocationTargetException | RuntimeException e) {
             throw new IllegalArgumentException("Can't read property: '"+propertyName+"' from object:'"+obj.getClass()+"': "+e.getMessage(), e);
         }
+    }
+
+    public static <T extends ProfileEntity> String getCollectionName(Class<T> clazz) {
+        String className = clazz.getSimpleName().toLowerCase();
+        if(className.endsWith("y")) {
+            className = className.substring(0, className.length()-1)+"ie";
+        }
+        return className+"s";
+    }
+
+
+    public static void removeEmptyElements(Collection<?> collection) {
+        Iterator<?> it = collection.iterator();
+        while(it.hasNext()){
+            Object element = it.next();
+            if(element == null || isAllFieldsNull(element)) {
+                it.remove();
+            }
+        }
+    }
+
+    private static boolean isAllFieldsNull(Object element) {
+        Field[] fields = element.getClass().getDeclaredFields();
+        for(Field field : fields) {
+            ReflectionUtils.makeAccessible(field);
+            if(!Modifier.isStatic(field.getModifiers()) && ReflectionUtils.getField(field, element) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean areListsEqual(final List<?> a, final List<?> b) {
+        if (a.size() != b.size()) {
+            return false;
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if(!Objects.equal(a.get(i), b.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static final String UID_DELIMETER = "-";

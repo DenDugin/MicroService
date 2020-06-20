@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="hobby")
 public class Hobby extends AbstractEntity<Long> implements Serializable, Comparable<Hobby>, ProfileEntity {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @SequenceGenerator(name="HOBBY_ID_GENERATOR", sequenceName="HOBBY_SEQ", allocationSize=1)

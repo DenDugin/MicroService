@@ -1,4 +1,4 @@
-package resume.microservice.com.ResumeService.Language;
+package resume.microservice.com.ResumeService.model;
 
 public final class Constants {
 

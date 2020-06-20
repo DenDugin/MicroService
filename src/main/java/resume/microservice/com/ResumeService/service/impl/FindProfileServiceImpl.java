@@ -1,7 +1,6 @@
 package resume.microservice.com.ResumeService.service.impl;
 
 
-import org.aspectj.apache.bcel.generic.RET;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import resume.microservice.com.ResumeService.Language.CurrentProfile;
-//import resume.microservice.com.ResumeService.elastic.ProfileSearchRepository;
+import resume.microservice.com.ResumeService.model.CurrentProfile;
 import resume.microservice.com.ResumeService.entity.Profile;
 import resume.microservice.com.ResumeService.exception.UserServiceException;
 import resume.microservice.com.ResumeService.repository.ProfileRepository;
 import resume.microservice.com.ResumeService.service.FindProfileService;
 
-import java.util.Optional;
-
 
 @Service
 public class FindProfileServiceImpl implements FindProfileService, UserDetailsService {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FindProfileServiceImpl.class);
 
 
@@ -31,41 +28,29 @@ public class FindProfileServiceImpl implements FindProfileService, UserDetailsSe
     private ProfileRepository profileRepository;
 
 
-//    @Autowired
-//    private ProfileSearchRepository profileSearchRepository;
-
-
     @Override
     public Profile findByUid(String uid) {
-        return profileRepository.findByUid(uid);
+
+        Profile profile = profileRepository.findByUid(uid);
+
+        if (profile == null) throw new UserServiceException("No find user by uid : "+ uid);
+
+        return profile;
     }
 
     @Override
     public Profile findOne(Long i) throws UserServiceException {
 
-        Optional<Profile> result = profileRepository.findById(i);
-        //  Optional --- шаблон вместо того, чтобы проверять на ноль
-        // функция введена в Java 8
+        Profile profile = profileRepository.findById(i).orElseThrow(() -> new UserServiceException("No find user by id : "+ i));
 
-        if (result.isPresent())
-            return result.get();
-        else  throw new UserServiceException("No find user by id : "+ i);
-
+        return profile;
     }
 
 
-
-
-    // здесь реализация Пагинации : в аргументе указан объект, который описываете как сформировать страницу и
-    // передаёте описание в запрос. Описание страницы инкапсулирует в себя класс PageRequest, у которого три конструктора:
-    // PageRequest(int page, int size, Sort sort) —  указывается, какую страницу надо вернуть и какой размер страницы в строках
-    // и дополнительно объект сортировки, задающий стабильный порядок строк
     @Override
     public Page<Profile> findAll(Pageable pageable) {
         return profileRepository.findAll(pageable);
     }
-
-
 
 
     @Override

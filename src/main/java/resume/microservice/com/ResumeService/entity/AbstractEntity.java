@@ -1,14 +1,12 @@
 package resume.microservice.com.ResumeService.entity;
 
 
-
-import resume.microservice.com.ResumeService.Language.AbstractModel;
+import resume.microservice.com.ResumeService.model.AbstractModel;
 
 import java.io.Serializable;
 
 
 public abstract class AbstractEntity<T> extends AbstractModel implements Serializable {
-    private static final long serialVersionUID = 8982713310863621560L;
 
     public abstract T getId();
 

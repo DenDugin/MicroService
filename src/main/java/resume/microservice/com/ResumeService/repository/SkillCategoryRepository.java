@@ -9,9 +9,7 @@ import java.util.List;
 
 
 
-//@RepositoryDefinition(domainClass= SkillCategory.class, idClass=Long.class)
 public interface SkillCategoryRepository  extends JpaRepository<SkillCategory, Long> {
-//public interface SkillCategoryRepository {
 
     List<SkillCategory> findAllByOrderById();
 

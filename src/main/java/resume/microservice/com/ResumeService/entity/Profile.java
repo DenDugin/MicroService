@@ -16,9 +16,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "profile")
-//@Document(indexName="profile", type = "profile") // для elastica - обозначаем, что данный класс - документ, корневой элемент индексации
+//@Document(indexName="profile", type = "profile")
 public class Profile implements Serializable {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @SequenceGenerator(name = "PROFILE_ID_GENERATOR", sequenceName = "PROFILE_SEQ", allocationSize=1)

@@ -2,8 +2,8 @@ package resume.microservice.com.ResumeService.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import resume.microservice.com.ResumeService.Language.LanguageLevel;
-import resume.microservice.com.ResumeService.Language.LanguageType;
+import resume.microservice.com.ResumeService.model.LanguageLevel;
+import resume.microservice.com.ResumeService.model.LanguageType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="language")
 public class Language extends AbstractEntity<Long> implements Serializable, ProfileEntity {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @SequenceGenerator(name="LANGUAGE_ID_GENERATOR", sequenceName="LANGUAGE_SEQ", allocationSize=1)

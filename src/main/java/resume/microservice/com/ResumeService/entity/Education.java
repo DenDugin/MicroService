@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="education")
 public class Education extends AbstractEntity<Long> implements Serializable, ProfileEntity {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @SequenceGenerator(name="EDUCATION_ID_GENERATOR", sequenceName="EDUCATION_SEQ", allocationSize=1)

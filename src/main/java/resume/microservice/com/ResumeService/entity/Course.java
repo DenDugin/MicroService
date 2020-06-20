@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "course")
 public class Course extends AbstractFinishDateEntity<Long> implements Serializable, ProfileEntity {
-    private static final long serialVersionUID = 4206575925684228495L;
+
 
     @Id
     @SequenceGenerator(name = "COURSE_ID_GENERATOR", sequenceName = "COURSE_SEQ", allocationSize = 1)

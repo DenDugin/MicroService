@@ -1,4 +1,4 @@
-package resume.microservice.com.ResumeService.Language;
+package resume.microservice.com.ResumeService.model;
 
 public class NotificationMessage {
     private String destinationAddress;

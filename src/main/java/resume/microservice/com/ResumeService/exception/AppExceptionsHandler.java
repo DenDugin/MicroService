@@ -15,15 +15,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Date;
 
-// перехват exception
+
 @ControllerAdvice
 public class AppExceptionsHandler {
 
     @Autowired
     private ErrorValue errorValue;
 
-    @ExceptionHandler//(value = {StudentNotFoundException.class})
-    // ErrorMessage - type of body response
+    @ExceptionHandler
     public ResponseEntity<ErrorMessage> handleException(UserServiceException exc) {
 
         ErrorMessage errorResponse = new ErrorMessage();
@@ -31,6 +30,7 @@ public class AppExceptionsHandler {
         errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
         errorResponse.setMessage(exc.getMessage());
         errorResponse.setTimestamp(new Date());
+        errorResponse.setStatusValue(HttpStatus.BAD_REQUEST.toString());
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -51,16 +51,12 @@ public class AppExceptionsHandler {
         errorResponse.setTimestamp(new Date());
         errorResponse.setField(exc.getBindingResult().getFieldError().getField());
 
-        // errorResponse.setFieldErrorList(exc.getBindingResult().getFieldErrors());
-
         String message = exc.getBindingResult().getFieldError().getDefaultMessage();
 
 
         if ( errorValue.errors.containsKey(message) )
                 message = errorValue.errors.get(message);
 
-
-        //bindingResult.addError(new FieldError(formName, fieldName, value, false, objectError.getCodes(), objectError.getArguments(), objectError.getDefaultMessage()));
 
         errorResponse.setStatusValue(exc.getBindingResult().getFieldError().getField() + " : "+ message);
 
@@ -82,7 +78,6 @@ public class AppExceptionsHandler {
 
 
     @ExceptionHandler
-    // ErrorMessage - type of body response
     public ResponseEntity<ErrorMessage> handleException(CantCompleteClientRequestException exc) {
 
         ErrorMessage errorResponse = new ErrorMessage();
@@ -98,13 +93,7 @@ public class AppExceptionsHandler {
 
 
 
-
-
-
-
-    // catch all exception
     @ExceptionHandler
-    // StudentErrorResponse - type response body
     public ResponseEntity<ErrorMessage> handleException(Exception exc) {
 
         ErrorMessage errorResponse = new ErrorMessage();

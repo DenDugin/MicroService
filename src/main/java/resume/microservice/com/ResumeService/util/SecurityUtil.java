@@ -4,7 +4,7 @@ package resume.microservice.com.ResumeService.util;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import resume.microservice.com.ResumeService.Language.CurrentProfile;
+import resume.microservice.com.ResumeService.model.CurrentProfile;
 import resume.microservice.com.ResumeService.entity.Profile;
 
 import java.util.UUID;
@@ -38,6 +38,8 @@ public final class SecurityUtil {
                 currentProfile, currentProfile.getPassword(), currentProfile.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+
 
     public static boolean isCurrentProfileAuthentificated() {
         return getCurrentProfile() != null;

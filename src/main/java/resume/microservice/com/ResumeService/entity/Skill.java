@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Entity
 @Table(name="skill")
 public class Skill extends AbstractEntity<Long> implements Serializable, ProfileEntity {
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="SKILL_ID_GENERATOR", sequenceName="SKILL_SEQ", allocationSize=1)

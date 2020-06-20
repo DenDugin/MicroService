@@ -1,8 +1,6 @@
 package resume.microservice.com.ResumeService.form;
 
-//import Annotation.Constraints.EnglishLanguage;
-//import Annotation.Constraints.FieldMatch;
-//import Annotation.Constraints.PasswordStrength;
+
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +9,7 @@ import java.io.Serializable;
 
 //@FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match") // проверка пароля!
 public class SignUpForm implements Serializable {
-    private static final long serialVersionUID = 185151345117447819L;
+
 
     @NotNull
     @Size(max=50)

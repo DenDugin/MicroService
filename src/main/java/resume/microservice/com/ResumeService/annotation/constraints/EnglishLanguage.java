@@ -20,7 +20,7 @@ public @interface EnglishLanguage {
 
 	String message() default "EnglishLanguage";
 	// 0123456789
-	boolean withNumbers() default true;
+	boolean withNumbers() default false;
 
 	//.,?!-:()'"[]{}; \t\n
 	boolean withPunctuations() default true;

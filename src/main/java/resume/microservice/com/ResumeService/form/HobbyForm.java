@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HobbyForm implements Serializable {
-    private static final long serialVersionUID = 4135568197764740034L;
+
     @Valid
     private List<Hobby> items = new ArrayList<>();
 

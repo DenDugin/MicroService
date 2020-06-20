@@ -1,9 +1,6 @@
 package resume.microservice.com.ResumeService.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import resume.microservice.com.ResumeService.entity.AbstractEntity;
-import resume.microservice.com.ResumeService.entity.Profile;
-import resume.microservice.com.ResumeService.entity.ProfileEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
