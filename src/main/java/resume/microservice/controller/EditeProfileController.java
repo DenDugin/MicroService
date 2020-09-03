@@ -15,10 +15,9 @@ import resume.microservice.exception.CantCompleteClientRequestException;
 import resume.microservice.exception.FormValidationException;
 import resume.microservice.service.EditProfileService;
 
-
-
 import javax.validation.Valid;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/profile")
